@@ -46,14 +46,14 @@ class Produto {
 
 class Individuo{
 	
-	private List<String> espacos = new ArrayList<>();
-	private List<String> valores = new ArrayList<>();
+	private List<Double> espacos = new ArrayList<>();
+	private List<Double> valores = new ArrayList<>();
 	private Double limitesEspacos;
 	private Double notaAvaliacao;
 	private int geracao;
 	private List<String> cromossomo = new ArrayList<>();
 	
-	public Individuo(List espacos, List valores, Double limitesEspacos) {
+	public Individuo(List<Double> espacos, List<Double> valores, Double limitesEspacos) {
 		this.espacos = espacos;
 		this.valores = valores;
 		this.limitesEspacos = limitesEspacos;
@@ -67,19 +67,19 @@ class Individuo{
 		}
 	}
 
-	public List<String> getEspacos() {
+	public List<Double> getEspacos() {
 		return espacos;
 	}
 
-	public void setEspacos(List<String> espacos) {
+	public void setEspacos(List<Double> espacos) {
 		this.espacos = espacos;
 	}
 
-	public List<String> getValores() {
+	public List<Double> getValores() {
 		return valores;
 	}
 
-	public void setValores(List<String> valores) {
+	public void setValores(List<Double> valores) {
 		this.valores = valores;
 	}
 
@@ -139,8 +139,28 @@ public class Executar {
 		List<Produto> listaProdutos = new ArrayList<Produto>();
 		listaProdutos.addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13));
 		
-		for (Produto produto: listaProdutos) {
-			System.out.print(produto);
+		List<Double> espacos = new ArrayList<>();
+		List<Double> valores = new ArrayList<>();
+		List<String> nomes = new ArrayList<>();
+		
+		for (Produto produto : listaProdutos) {
+			espacos.add(produto.getEspaco());
+			valores.add(produto.getValor());
+			nomes.add(produto.getNome());
+		}
+		
+		Double limite = 3.0;
+		
+		Individuo individuo = new Individuo(espacos, valores, limite);
+		System.out.println("Espacos: " + individuo.getEspacos());
+		System.out.println("Valores: " + individuo.getValores());
+		System.out.println("Cromossomos: " + individuo.getCromossomo());
+		
+		System.out.println("\nComponentes da carga: ");
+		for (int i=0; i<listaProdutos.size(); i++) {
+			if (individuo.getCromossomo().get(i) == "1") {
+				System.out.println("Produto: " + listaProdutos.get(i).getNome() + " R$: " + listaProdutos.get(i).getValor());
+			}
 		}
 	}
 }
