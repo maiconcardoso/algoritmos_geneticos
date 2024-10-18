@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class Produto {
+	
 	private String nome;
 	private Double espaco;
 	private Double valor;
@@ -40,6 +41,80 @@ class Produto {
 	public String toString() {
 		return "\nProduto [Nome: " + nome + ", Espaco: " + espaco + ", Valor: " + valor + "]";
 	}
+	
+}
+
+class Individuo{
+	
+	private List<String> espacos = new ArrayList<>();
+	private List<String> valores = new ArrayList<>();
+	private Double limitesEspacos;
+	private Double notaAvaliacao;
+	private int geracao;
+	private List<String> cromossomo = new ArrayList<>();
+	
+	public Individuo(List espacos, List valores, Double limitesEspacos) {
+		this.espacos = espacos;
+		this.valores = valores;
+		this.limitesEspacos = limitesEspacos;
+		
+		for (int i=0; i<espacos.size(); i++) {
+			if (Math.random() < 0.5) {
+				this.cromossomo.add("0");
+			} else {
+				this.cromossomo.add("1");
+			}
+		}
+	}
+
+	public List<String> getEspacos() {
+		return espacos;
+	}
+
+	public void setEspacos(List<String> espacos) {
+		this.espacos = espacos;
+	}
+
+	public List<String> getValores() {
+		return valores;
+	}
+
+	public void setValores(List<String> valores) {
+		this.valores = valores;
+	}
+
+	public Double getLimitesEspacos() {
+		return limitesEspacos;
+	}
+
+	public void setLimitesEspacos(Double limitesEspacos) {
+		this.limitesEspacos = limitesEspacos;
+	}
+
+	public Double getNotaAvaliacao() {
+		return notaAvaliacao;
+	}
+
+	public void setNotaAvaliacao(Double notaAvaliacao) {
+		this.notaAvaliacao = notaAvaliacao;
+	}
+
+	public int getGeracao() {
+		return geracao;
+	}
+
+	public void setGeracao(int geracao) {
+		this.geracao = geracao;
+	}
+
+	public List<String> getCromossomo() {
+		return cromossomo;
+	}
+
+	public void setCromossomo(List<String> cromossomo) {
+		this.cromossomo = cromossomo;
+	}
+	
 	
 }
 
