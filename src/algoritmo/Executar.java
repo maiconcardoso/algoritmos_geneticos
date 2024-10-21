@@ -50,6 +50,7 @@ class Individuo{
 	private List<Double> valores = new ArrayList<>();
 	private Double limitesEspacos;
 	private Double notaAvaliacao;
+	private Double espacoUsado;
 	private int geracao;
 	private List<String> cromossomo = new ArrayList<>();
 	
@@ -57,6 +58,9 @@ class Individuo{
 		this.espacos = espacos;
 		this.valores = valores;
 		this.limitesEspacos = limitesEspacos;
+		this.notaAvaliacao = 0.0;
+		this.espacoUsado = 0.0;
+		this.geracao = 0;
 		
 		for (int i=0; i<espacos.size(); i++) {
 			if (Math.random() < 0.5) {
@@ -65,6 +69,52 @@ class Individuo{
 				this.cromossomo.add("1");
 			}
 		}
+		
+	}
+	
+	public void avaliacao() {
+		Double nota = 0.0;
+		Double somaEspacos = 0.0;
+		
+		for (int i = 0; i < this.cromossomo.size(); i++) {
+			if (this.cromossomo.get(i).equals("1")) {
+				nota += this.valores.get(i);
+				somaEspacos += this.espacos.get(i);
+			}
+		}
+		
+		if (somaEspacos > this.limitesEspacos) {
+			nota = 1.0;
+		}
+		
+		this.notaAvaliacao = nota;
+		this.espacoUsado = somaEspacos;
+	}
+	
+	public List<Individuo> crossover(Individuo outroIndividuo) {
+		
+		int corte = (int) Math.round(Math.random() * this.cromossomo.size());
+		List<String> filho = new ArrayList<>();
+		
+		filho.addAll(outroIndividuo.getCromossomo().subList(0, corte));
+		filho.addAll(this.cromossomo.subList(corte, this.cromossomo.size()));
+		
+		List<String> filho2 = new ArrayList<>();
+		
+		filho2.addAll(this.cromossomo.subList(0, corte));
+		filho2.addAll(outroIndividuo.getCromossomo().subList(corte, this.cromossomo.size()));
+		
+		List<Individuo> filhos = new ArrayList<>();
+		filhos.add(new Individuo(espacos, valores, limitesEspacos));
+		filhos.add(new Individuo(espacos, valores, limitesEspacos));
+		
+		filhos.get(0).setCromossomo(filho);
+		filhos.get(0).setGeracao(this.geracao + 1);
+		
+		filhos.get(1).setCromossomo(filho2);
+		filhos.get(1).setGeracao(this.geracao + 1);
+		
+		return filhos;
 	}
 
 	public List<Double> getEspacos() {
@@ -97,6 +147,14 @@ class Individuo{
 
 	public void setNotaAvaliacao(Double notaAvaliacao) {
 		this.notaAvaliacao = notaAvaliacao;
+	}
+
+	public Double getEspacoUsado() {
+		return espacoUsado;
+	}
+
+	public void setEspacoUsado(Double espacoUsado) {
+		this.espacoUsado = espacoUsado;
 	}
 
 	public int getGeracao() {
@@ -156,11 +214,22 @@ public class Executar {
 		System.out.println("Valores: " + individuo.getValores());
 		System.out.println("Cromossomos: " + individuo.getCromossomo());
 		
+		Individuo individuo2 = new Individuo(espacos, valores, limite);
+		System.out.println("Espacos: " + individuo2.getEspacos());
+		System.out.println("Valores: " + individuo2.getValores());
+		System.out.println("Cromossomos: " + individuo2.getCromossomo());
+		
+		individuo.crossover(individuo2);
+		
 		System.out.println("\nComponentes da carga: ");
 		for (int i=0; i<listaProdutos.size(); i++) {
 			if (individuo.getCromossomo().get(i) == "1") {
 				System.out.println("Produto: " + listaProdutos.get(i).getNome() + " R$: " + listaProdutos.get(i).getValor());
 			}
 		}
+		
+		individuo.avaliacao();
+		System.out.println("\nNota Avaliação: " + individuo.getNotaAvaliacao());
+		System.out.println("Espaço Usado: " + individuo.getEspacoUsado());
 	}
 }
