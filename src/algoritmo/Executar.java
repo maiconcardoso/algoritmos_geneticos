@@ -117,6 +117,22 @@ class Individuo{
 		return filhos;
 	}
 
+	public Individuo mutacao(Double taxaMutacao) {
+		System.out.println("Cromossomo antes da mutação: " + this.cromossomo);
+		for (int i=0; i < this.cromossomo.size(); i++) {
+			if (Math.random() < taxaMutacao) {
+				if (this.cromossomo.get(i).equals("1")) {
+					this.cromossomo.set(i, "0");
+				} else {
+					this.cromossomo.set(i, "1");
+				}
+			}
+		}
+
+		System.out.println("Cromossomo depois da mutação: " + this.cromossomo);
+		return this;
+	}
+
 	public List<Double> getEspacos() {
 		return espacos;
 	}
@@ -220,6 +236,10 @@ public class Executar {
 		System.out.println("Cromossomos: " + individuo2.getCromossomo());
 		
 		individuo.crossover(individuo2);
+
+		System.out.println();
+		individuo.mutacao(0.05);
+		individuo2.mutacao(0.05);
 		
 		System.out.println("\nComponentes da carga: ");
 		for (int i=0; i<listaProdutos.size(); i++) {
