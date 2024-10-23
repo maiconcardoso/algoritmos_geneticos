@@ -3,7 +3,7 @@ package algoritmo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Individuo {
+public class Individuo implements Comparable<Individuo>{
 
     private List<Double> espacos = new ArrayList<>();
 	private List<Double> valores = new ArrayList<>();
@@ -91,6 +91,17 @@ public class Individuo {
 		System.out.println("Cromossomo depois da mutação: " + this.cromossomo);
 		return this;
 	}
+
+    @Override
+    public int compareTo(Individuo individuo) {
+        if (this.notaAvaliacao > individuo.getNotaAvaliacao()) {
+            return -1;
+        } 
+        if (this.notaAvaliacao < individuo.getNotaAvaliacao()) {
+            return 1;
+        }
+        return 0;
+    }   
 
 	public List<Double> getEspacos() {
 		return espacos;

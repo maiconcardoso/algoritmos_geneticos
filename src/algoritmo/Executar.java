@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import algoritmo.model.AlgoritmoGenetico;
+import algoritmo.model.Individuo;
 import algoritmo.model.Produto;
 
 
@@ -42,12 +43,23 @@ public class Executar {
 		Double limite = 3.0;
 		int tamanhoPopulacao = 20;
 		AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
-		ag.inicializaPopulacao(espacos, valores, limite);;
+		ag.inicializaPopulacao(espacos, valores, limite);
+
+		// Avaliação
+		for (Individuo individuo : ag.getPopulacao()) {
+			individuo.avaliacao();
+		}
+
+		// Ordernar populaçao
+		ag.ordenaPopulacao();
+
+		System.out.println();
 		for (int i=0; i<ag.getTamanhoPopulacao(); i++) {
-			System.out.println("*** Indivíduo " + i + " ***\n Espaços = " +
+			System.out.println("\n*** Indivíduo " + i + " ***\nEspaços = " +
 			ag.getPopulacao().get(i).getEspacos() + 
 			"\nValores = " + ag.getPopulacao().get(i).getValores() +
-			"\nCromossomo = " + ag.getPopulacao().get(i).getCromossomo());
+			"\nCromossomo = " + ag.getPopulacao().get(i).getCromossomo() +
+			"\nNota Avaliação: " + ag.getPopulacao().get(i).getNotaAvaliacao());
 		}
 		
 	}

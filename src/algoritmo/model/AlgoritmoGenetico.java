@@ -1,6 +1,7 @@
 package algoritmo.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AlgoritmoGenetico {
@@ -20,6 +21,10 @@ public class AlgoritmoGenetico {
 		}
 		this.melhorSolucao = this.populacao.get(0);
 	}
+
+    public void ordenaPopulacao() {
+        Collections.sort(this.populacao);
+    }
 
 	public int getTamanhoPopulacao() {
 		return tamanhoPopulacao;
