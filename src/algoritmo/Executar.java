@@ -53,14 +53,12 @@ public class Executar {
 		// Ordernar populaçao
 		ag.ordenaPopulacao();
 
+		// Melhor indíviduo
+		ag.melhorIndividuo(ag.getPopulacao().get(0));
+
 		System.out.println();
-		for (int i=0; i<ag.getTamanhoPopulacao(); i++) {
-			System.out.println("\n*** Indivíduo " + i + " ***\nEspaços = " +
-			ag.getPopulacao().get(i).getEspacos() + 
-			"\nValores = " + ag.getPopulacao().get(i).getValores() +
-			"\nCromossomo = " + ag.getPopulacao().get(i).getCromossomo() +
-			"\nNota Avaliação: " + ag.getPopulacao().get(i).getNotaAvaliacao());
-		}
+		System.out.println("\nMelhor solução: " + ag.getMelhorSolucao().getCromossomo() + 
+			"\nNota: " + ag.getMelhorSolucao().getNotaAvaliacao());
 		
 	}
 }

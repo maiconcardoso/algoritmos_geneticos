@@ -26,6 +26,12 @@ public class AlgoritmoGenetico {
         Collections.sort(this.populacao);
     }
 
+    public void melhorIndividuo(Individuo individuo) {
+        if (individuo.getNotaAvaliacao() > this.melhorSolucao.getNotaAvaliacao()) {
+            this.melhorSolucao = individuo;
+        }
+    }
+
 	public int getTamanhoPopulacao() {
 		return tamanhoPopulacao;
 	}
