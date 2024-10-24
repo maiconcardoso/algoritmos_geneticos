@@ -57,12 +57,9 @@ public class Executar {
 		ag.melhorIndividuo(ag.getPopulacao().get(0));
 
 		Double soma = ag.somaAvaliacao();
-		System.out.println();
-		System.out.print("\nSoma da avaliação: " + soma);
-
-		System.out.println();
-		System.out.println("\nMelhor solução: " + ag.getMelhorSolucao().getCromossomo() + 
-			"\nNota: " + ag.getMelhorSolucao().getNotaAvaliacao());
-		
+		for (int i=0; i<ag.getPopulacao().size() / 2; i++) {
+			int pai1 = ag.selecionaPai(soma);
+			int pai2 = ag.selecionaPai(soma);
+		}
 	}
 }

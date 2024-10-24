@@ -40,6 +40,19 @@ public class AlgoritmoGenetico {
 		return soma;
 	}
 
+	public int selecionaPai(Double somaAvaliacao) {
+		int pai = -1;
+		Double valorSorteado = Math.random() * somaAvaliacao;
+		Double soma = 0.0;
+		int i = 0;
+		while (i < this.populacao.size() && soma < valorSorteado) {
+			soma += this.populacao.get(i).getNotaAvaliacao();
+			pai += 1;
+			i += 1;
+		}
+		return pai;
+	}
+
 	public int getTamanhoPopulacao() {
 		return tamanhoPopulacao;
 	}
