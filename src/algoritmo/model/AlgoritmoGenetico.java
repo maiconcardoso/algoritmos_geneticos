@@ -32,6 +32,14 @@ public class AlgoritmoGenetico {
         }
     }
 
+	public Double somaAvaliacao() {
+		Double soma = 0.0;
+		for (Individuo individuo : this.populacao) {
+			soma += individuo.getNotaAvaliacao();
+		}
+		return soma;
+	}
+
 	public int getTamanhoPopulacao() {
 		return tamanhoPopulacao;
 	}
