@@ -53,6 +53,11 @@ public class AlgoritmoGenetico {
 		return pai;
 	}
 
+	public void visualizaGeracao() {
+		Individuo melhor = this.populacao.get(0);
+		System.out.println("Geração: " + melhor.getGeracao() + " Valor: " + melhor.getNotaAvaliacao() + " Espaço Usado: " + melhor.getEspacoUsado() + " Cromossomo: " + melhor.getCromossomo());
+	}
+
 	public int getTamanhoPopulacao() {
 		return tamanhoPopulacao;
 	}
