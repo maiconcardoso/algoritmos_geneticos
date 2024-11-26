@@ -41,7 +41,8 @@ public class Executar {
 		}
 		
 		Double limite = 3.0;
-		int tamanhoPopulacao = 4;
+		int tamanhoPopulacao = 20;
 		AlgoritmoGenetico ag = new AlgoritmoGenetico(tamanhoPopulacao);
+		ag.resolver(limite, tamanhoPopulacao, espacos, valores, limite);
 	}
 }
